@@ -1,4 +1,4 @@
-package University.UniversitySources.entity;
+package University.UniversitySources.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
