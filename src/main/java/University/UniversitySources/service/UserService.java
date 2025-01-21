@@ -28,11 +28,15 @@ public class UserService {
         databaseReference.child(userId).removeValueAsync();
     }
 
+    //this get user method is an asynchronous method, which means that it will not wait for the data to be retrieved from the database. 
+    //The reason this is an asynchronous method because we are unsure how long it will take for the data to be retrieved from the database.
+    //Therefore, we need to use a callback method to handle the data when it is retrieved from the database.
+
     public void getUser(String userId, UserCallBack userCallBack){
         databaseReference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot){
-                if(dataSnapshot.exists()){
+            public void onDataChange(DataSnapshot dataSnapshot){ //dataSnapshot is similar to a pointer that is currently pointing to the data in the database
+                if(dataSnapshot.exists()){ //the "pointer" is currently pointing to a data and check whehter the data exists or not 
                     userCallBack.onUserCallBack(dataSnapshot.getValue());
                 } else {
                     userCallBack.onUserCallBack(null);
