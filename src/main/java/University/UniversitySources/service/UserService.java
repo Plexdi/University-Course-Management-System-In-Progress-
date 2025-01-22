@@ -23,11 +23,17 @@ public class UserService {
     public void saveUser(String userId, Object user) {
         databaseReference.child(userId).setValueAsync(user);
     }
-
-    public void deleteUser(String userId){
-        databaseReference.child(userId).removeValueAsync();
-    }
-
+//---------------------------------------------------------------------------------------------------------
+    // public void deleteUser(String userId){
+    //     ApiFuture<Void> future = databaseReference.child(userId).removeValue();
+    //     try {
+    //         future.get();
+    //         System.out.println("User Deleted Successfully");
+    //     } catch (Exception e) {
+    //         System.out.println("An error occurred: " + e.getMessage());
+    //     }
+    // }
+//---------------------------------------------------------------------------------------------------------
     //this get user method is an asynchronous method, which means that it will not wait for the data to be retrieved from the database. 
     //The reason this is an asynchronous method because we are unsure how long it will take for the data to be retrieved from the database.
     //Therefore, we need to use a callback method to handle the data when it is retrieved from the database.
@@ -53,5 +59,7 @@ public class UserService {
         void onUserCallBack(Object user);
         void onFailure(String error);
     }
+
+
 
 }

@@ -2,6 +2,7 @@ package University.UniversitySources.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ public class UserController {
         return "User Saved Successfully";
     }
 
+    @DeleteMapping("/deleteUser/{userId}")
     public String deleteUser(@RequestBody String userId){
         userService.deleteUser(userId);
         return "User Deleted Successfully";
