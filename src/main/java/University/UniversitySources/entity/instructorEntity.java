@@ -9,18 +9,18 @@ public class instructorEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 
-    private long instructorID;
+    private long instructorId;
     private String name; 
     private String email;
     private String password;
     private String course;
 
     public long getInstructorID(){
-        return instructorID;
+        return instructorId;
     }
 
     public void setInstructorID(long Id){
-        this.instructorID = Id;
+        this.instructorId = Id;
     }
 
     public String getName(){

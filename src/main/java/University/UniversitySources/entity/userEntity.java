@@ -4,6 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 public class userEntity {
@@ -11,11 +15,20 @@ public class userEntity {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 
     private long studentId;
+
+    @NotNull(message = "Name is required")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name; 
     private String course;
+
+    @Email(message = "Email is invalid")
+    @NotNull(message = "Email is required")
     private String email;
+
+    @NotNull(message = "Password is required")
     private String password;
 
+    
     public long getStudentId(){
         return studentId;
     }
