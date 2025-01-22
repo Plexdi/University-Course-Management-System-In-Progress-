@@ -14,11 +14,24 @@ public class InstructorService {
 
     public InstructorService(){
         this.instructorDatabaseReference = FirebaseDatabase.getInstance().getReference("instructors");
+        
     }
 
     public void saveInstructor(String instructorId, Object instructors){
-        instructorDatabaseReference.child(instructorId).setValueAsync(instructors);
+        if (instructors == null){
+            System.out.println("Instructor does not exist");
+        } else{
+            System.out.println("Instructor Saved Successfully " + instructorId);
+            System.out.println(instructorDatabaseReference.child(instructorId));
+            System.out.println(instructors);
+            instructorDatabaseReference.child(instructorId).setValueAsync(instructors);
+        }
     }
+
+    // public void saveInstructor(String instructorId, Object instructor){
+    //     instructorDatabaseReference.child(instructorId).setValueAsync(instructor);
+    // }
+
 
     public void deleteInstructor(String instructorId, UserCallBack userCallBack){
         instructorDatabaseReference.child(instructorId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -38,7 +51,7 @@ public class InstructorService {
     }
 
     public interface UserCallBack {
-        void onUserCallBack(Object user);
+        void onUserCallBack(Object instructorObject);
         void onFailure(String error);
     }
 

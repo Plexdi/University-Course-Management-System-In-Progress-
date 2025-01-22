@@ -5,10 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import University.UniversitySources.Entity.instructorEntity;
 import University.UniversitySources.service.InstructorService;
 
 @RestController
@@ -18,10 +20,15 @@ public class InstructorController {
     @Autowired
     private InstructorService instructorService;
 
-    @PostMapping("/{instructorId}")
-    public String saveInstructor(@PathVariable String instructorId, Object instructor){
+    @PostMapping("/saveInstructor /{instructorId}")
+    public ResponseEntity<String> saveInstructor(
+            @PathVariable String instructorId,
+            @RequestBody instructorEntity instructor) {
+        if (instructor == null || instructor.getName() == null || instructor.getEmail() == null) {
+            return ResponseEntity.badRequest().body("Invalid instructor data");
+        }
         instructorService.saveInstructor(instructorId, instructor);
-        return "Instructor Saved Successfully";
+        return ResponseEntity.ok("Instructor saved successfully!");
     }
 
     //Pathvariables when you want to capture a value from the URL itself e.g ID 
@@ -47,10 +54,5 @@ public class InstructorController {
         });
         return deferredResult;
     }
-
-    
-
-
-
 
 }
